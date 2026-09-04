@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+ <head>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport'/>
+  <b:include data='blog' name='all-head-content'/>
+  <title><data:blog.pageTitle/></title>
+  
+  <script src='https://cdn.tailwindcss.com'></script>
+  <link href='https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap' rel='stylesheet'/>
+  
+  <style>
+    @font-face {
+      font-family: 'Faruma';
+      src: url('https://raw.githubusercontent.com/AhmedSharyph/website-assets/main/Faruma.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Self-Realizing RTL Rule with Increased Font Size and 1.5 Line Height */
+    [data-dir="rtl"] {
+      direction: rtl;
+      text-align: right;
+      font-family: 'Faruma', sans-serif !important;
+      line-height: 1.5 !important;
+    }
+    [data-dir="rtl"] h1, 
+    [data-dir="rtl"] h2, 
+    [data-dir="rtl"] h3, 
+    [data-dir="rtl"] h4, 
+    [data-dir="rtl"] h5, 
+    [data-dir="rtl"] h6,
+    [data-dir="rtl"] p,
+    [data-dir="rtl"] a,
+    [data-dir="rtl"] span,
+    [data-dir="rtl"] div {
+      font-family: 'Faruma', sans-serif !important;
+    }
+    [data-dir="rtl"] .post-body,
+    [data-dir="rtl"] div.text-neutral-600 {
+      font-size: 1.2rem !important;
+    }
+    /* Flip arrow indicator for RTL articles and reverse hover translation */
+    [data-dir="rtl"] .read-more-arrow {
+      display: inline-block;
+      transform: scaleX(-1);
+    }
+    [data-dir="rtl"] .group\/link:hover .read-more-arrow {
+      transform: scaleX(-1) translateX(0.25rem);
+    }
+    /* Dynamic translation for Read More text in RTL */
+    [data-dir="rtl"] .read-more-text {
+      display: none;
+    }
+    [data-dir="rtl"] .read-more-rtl-text {
+      display: inline;
+    }
+    .read-more-rtl-text {
+      display: none;
+    }
+
+    [data-dir="ltr"] {
+      direction: ltr;
+      text-align: left;
+    }
+  </style>
+
+  <b:skin>
+    <![CDATA[
+    body { 
+     margin: 0; 
+     padding: 0; 
+    }
+    ]]>
+  </b:skin>
+ </head>
+ <body class='bg-[#FBFBFD] text-neutral-900 min-h-screen flex flex-col justify-between selection:bg-indigo-500/10 selection:text-indigo-600 antialiased relative overflow-x-hidden'>
+
+ <div class='absolute top-0 left-1/2 -translate-x-1/2 w-[50rem] h-[20rem] bg-gradient-to-tr from-indigo-500/4 to-blue-500/4 blur-[140px] pointer-events-none'></div>
+
+ <header class='w-full bg-[#FBFBFD]/80 backdrop-blur-xl border-b border-neutral-200/50 fixed top-0 left-0 z-30 transition-all'>
+   <div class='w-full px-6 flex items-center justify-between h-16'>
+     <a class='font-extrabold text-neutral-900 tracking-tight text-sm truncate flex items-center gap-2.5 group' expr:href='data:blog.homepageUrl'>
+       <span class='w-2 h-2 rounded-full bg-indigo-600 ring-4 ring-indigo-600/10'></span>
+       <span class='tracking-normal font-bold'><data:blog.title/></span>
+     </a>
+   </div>
+ </header>
+
+ <main class='w-full px-6 pt-28 pb-10 md:pb-14 flex-grow relative z-10'>
+    <b:section class='main' id='main' showaddelement='yes'>
+      <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog'>
+        <b:includable id='main'>
+          <div class='space-y-6 md:space-y-8'>
+            <b:loop values='data:posts' var='post'>
+              <article class='group bg-white/90 backdrop-blur-md p-6 sm:p-9 md:p-10 rounded-[2rem] border border-neutral-200/80 shadow-[0_4px_24px_rgba(0,0,0,0.015)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.04)] hover:border-neutral-300 transition-all duration-300 self-detect'>
+                
+                <h2 class='text-xl sm:text-2xl md:text-3xl font-bold mb-3 tracking-tight text-neutral-900 leading-snug'>
+                  <a class='group-hover:text-indigo-600 transition-colors block' expr:href='data:post.url'>
+                    <data:post.title/>
+                  </a>
+                </h2>
+
+                <div class='text-xs text-neutral-400 font-medium mb-5 pb-4 border-b border-neutral-100'>
+                  <span><data:post.date/></span>
+                </div>
+
+                <div class='text-neutral-600 text-sm md:text-base leading-relaxed space-y-4 mb-6 font-normal post-body'>
+                  <b:if cond='data:blog.pageType == &quot;item&quot; or data:blog.pageType == &quot;static_page&quot;'>
+                    <data:post.body/>
+                  <b:else/>
+                    <b:if cond='data:post.snippet'>
+                      <data:post.snippet/>
+                    <b:else/>
+                      <data:post.body/>
+                    </b:if>
+                  </b:if>
+                </div>
+
+                <b:if cond='data:blog.pageType == &quot;index&quot;'>
+                  <div class='pt-2'>
+                    <a class='inline-flex items-center gap-2 text-xs md:text-sm font-bold text-neutral-900 hover:text-indigo-600 transition-colors group/link' expr:href='data:post.url'>
+                      <span class='read-more-text'>Read full article</span>
+                      <span class='read-more-rtl-text'>ާލިޔުން އެއްކޮށް ކިޔާލა</span>
+                      <span class='read-more-arrow group-hover/link:translate-x-1 transition-transform'>→</span>
+                    </a>
+                  </div>
+                <b:else/>
+                  <div class='pt-6 border-t border-neutral-100 flex items-center justify-between'>
+                    <a class='inline-flex items-center gap-1.5 text-xs md:text-sm font-bold text-neutral-600 hover:text-neutral-900 transition-colors' expr:href='data:blog.homepageUrl'>
+                      <span>←</span> Back to Stream
+                    </a>
+                  </div>
+                </b:if>
+
+              </article>
+            </b:loop>
+          </div>
+        </b:includable>
+      </b:widget>
+    </b:section>
+ </main>
+
+ <footer class='w-full bg-transparent border-t border-neutral-200/40 py-10 text-center text-xs text-neutral-400 relative z-10'>
+    <div class='w-full px-6 flex items-center justify-between'>
+      <p class='font-medium'>© 2026 <data:blog.title/>. Built for clarity.</p>
+      <a class='hover:text-neutral-900 transition-colors font-semibold' expr:href='data:blog.homepageUrl'>Top ↑</a>
+    </div>
+ </footer>
+
+ <script>
+    (() => {
+      'use strict';
+      const rtlRegex = /[\u0780-\u07BF\u0600-\u06FF]/;
+      document.querySelectorAll('.self-detect').forEach(article => {
+        const text = article.innerText || '';
+        if (rtlRegex.test(text)) {
+          article.setAttribute('data-dir', 'rtl');
+        } else {
+          article.setAttribute('data-dir', 'ltr');
+        }
+      });
+    })();
+ </script>
+
+</body>
+</html>
