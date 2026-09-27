@@ -1,0 +1,2194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsversion='3' b:responsive='true' b:templateversion='2.0.0' expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+  <meta charset='UTF-8'/>
+  <meta content='width=device-width, initial-scale=1.0' name='viewport'/>
+  <title><data:blog.pageTitle/></title>
+<b:skin><![CDATA[
+    :root {
+      --primary: #1CABE2;
+      --primary-hover: #1796c7;
+      --primary-soft: #EAF7FC;
+      --surface: #FFFFFF;
+      --page: #F8FAFC;
+      --text: #0F172A;
+      --muted: #64748B;
+      --border: #E2E8F0;
+      --sidebar: #FFFFFF;
+      --sidebar-text: #334155;
+      --shadow: 0 8px 30px rgba(15, 23, 42, .06);
+    }
+
+    html[data-theme='dark'] {
+      --surface: #111827;
+      --page: #0B1120;
+      --text: #E5E7EB;
+      --muted: #94A3B8;
+      --border: #263244;
+      --sidebar: #0F172A;
+      --sidebar-text: #CBD5E1;
+      --primary-soft: #12384A;
+      --shadow: 0 8px 30px rgba(0, 0, 0, .24);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--page) !important;
+      color: var(--text) !important;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    a { color: inherit; }
+    .theme-surface { background: var(--surface) !important; }
+    .theme-border { border-color: var(--border) !important; }
+    .theme-text { color: var(--text) !important; }
+    .theme-muted { color: var(--muted) !important; }
+    .theme-primary { color: var(--primary) !important; }
+    .theme-primary-bg { background: var(--primary) !important; }
+    .theme-soft { background: var(--primary-soft) !important; }
+
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 9999px; }
+    html[data-theme='dark'] .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; }
+
+    .sidebar {
+      width: 18rem;
+      background: var(--sidebar) !important;
+      border-color: var(--border) !important;
+      color: var(--sidebar-text);
+    }
+    .sidebar.collapsed { width: 5rem; }
+    .sidebar.collapsed .sidebar-label,
+    .sidebar.collapsed .sidebar-heading,
+    .sidebar.collapsed .sidebar-status { display: none !important; }
+    .sidebar.collapsed .sidebar-header-button { justify-content: center; }
+    .sidebar.collapsed .sidebar-home { justify-content: center; }
+    .sidebar.collapsed .sidebar-toggle { margin-left: auto; margin-right: auto; }
+    .sidebar-header { background: var(--surface) !important; border-color: var(--border) !important; }
+    .sidebar-home { color: var(--text) !important; background: var(--primary-soft) !important; }
+    .sidebar-home:hover { background: #DDF3FB !important; }
+    html[data-theme='dark'] .sidebar-home:hover { background: #16445A !important; }
+    .sidebar-status-wrap { background: var(--page) !important; border-color: var(--border) !important; }
+
+    .post-card {
+      background: var(--surface) !important;
+      border: 1px solid var(--border) !important;
+      box-shadow: var(--shadow);
+    }
+
+    /* --- Post Body Theme Fixes --- */
+    .post-body, .post-body p, .post-body span, .post-body li, .post-body td, .post-body th {
+      color: var(--text) !important;
+    }
+    .post-body table {
+      background-color: var(--surface) !important;
+      border-color: var(--border) !important;
+    }
+    .post-body th, .post-body td {
+      border-color: var(--border) !important;
+    }
+    /* ----------------------------- */
+
+    .post-title-main { color: var(--text) !important; }
+    .post-content { color: var(--muted) !important; }
+    .post-content img { max-width: 100%; height: auto; border-radius: .75rem; }
+    .post-content a { color: var(--primary); }
+    .post-content a:hover { color: var(--primary-hover); }
+
+    .theme-toggle {
+      width: 2.5rem; height: 2.5rem; border-radius: .75rem;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text); cursor: pointer; display: inline-flex;
+      align-items: center; justify-content: center; transition: all .2s ease;
+    }
+    .theme-toggle:hover { color: var(--primary); border-color: var(--primary); background: var(--primary-soft); }
+
+    .mobile-menu-button { display: none; }
+    .mobile-overlay { display: none; }
+    @media (max-width: 1023px) {
+      .sidebar { width: 18rem; transform: translateX(-100%); position: fixed !important; }
+      .sidebar.mobile-open { transform: translateX(0); }
+      .sidebar.collapsed { width: 18rem; }
+      .sidebar.collapsed .sidebar-label,
+      .sidebar.collapsed .sidebar-heading,
+      .sidebar.collapsed .sidebar-status { display: block !important; }
+      .sidebar.collapsed .sidebar-header-button,
+      .sidebar.collapsed .sidebar-home { justify-content: flex-start; }
+      .mobile-menu-button { display: inline-flex; }
+      .mobile-overlay {
+        display: block; position: fixed; inset: 0; background: rgba(15,23,42,.38);
+        backdrop-filter: blur(2px); z-index: 30; opacity: 0; pointer-events: none; transition: opacity .2s ease;
+      }
+      .mobile-overlay.visible { opacity: 1; pointer-events: auto; }
+    }
+
+    /* Blogger system elements */
+    .widget-title, .header-widget { display: none; }
+    .blog-pager a, .jump-link a { color: var(--primary); }
+    .comments, .author-profile { background: var(--surface); color: var(--text); border-color: var(--border); }
+    input, textarea, select { background: var(--surface); color: var(--text); border-color: var(--border); }
+  ]]></b:skin>
+
+  <script src='https://cdn.tailwindcss.com'/>
+  <script>
+  //<![CDATA[
+    tailwind.config = {
+      darkMode: ['selector', 'html[data-theme="dark"]'],
+      theme: {
+        extend: {
+          colors: {
+            unicef: {
+              DEFAULT: '#1CABE2',
+              50: '#EAF7FC',
+              100: '#DDF3FB',
+              500: '#1CABE2',
+              600: '#1CABE2',
+              700: '#1796C7'
+            }
+          }
+        }
+      }
+    };
+  //]]>
+  </script>
+
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' rel='stylesheet'/>
+  <link href='https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap' rel='stylesheet'/>
+  <script defer='defer' src='https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js'/>
+</head>
+
+<body class='bg-slate-50 text-slate-800 antialiased min-h-screen selection:bg-unicef-500 selection:text-white'>
+
+<div class='min-h-screen flex flex-col'>
+
+  <div class='flex flex-1 relative min-h-screen'>
+
+    <div class='mobile-overlay' id='mobileOverlay' onclick='closeMobileSidebar()'/>
+
+    <aside class='sidebar fixed lg:sticky top-0 inset-y-0 left-0 z-40 h-screen transition-all duration-300 ease-in-out flex flex-col justify-between shrink-0 shadow-xl lg:shadow-none overflow-hidden' id='appSidebar'>
+
+      <div class='sidebar-header p-4 border-b flex items-center justify-between'>
+        <button aria-label='Toggle Sidebar' class='sidebar-header-button flex items-center gap-3 group overflow-hidden text-left bg-transparent border-none cursor-pointer p-0 focus:outline-none w-full' onclick='toggleSidebar()' type='button'>
+          <div class='w-10 h-10 rounded-2xl theme-primary-bg flex items-center justify-center text-white shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-transform shrink-0'>
+            <i class='fa-solid fa-shield-heart text-base'/>
+          </div>
+          <div class='sidebar-label truncate'>
+            <span class='font-bold text-base text-white tracking-tight block leading-none mb-1 truncate'><data:blog.title/></span>
+            <span class='text-[10px] font-medium text-sky-200 uppercase tracking-wider block'>Immunization Register</span>
+          </div>
+        </button>
+      </div>
+
+      <div class='flex flex-col flex-1 overflow-y-auto custom-scrollbar p-4 space-y-6 theme-surface'>
+        <div class='space-y-1.5'>
+          <a class='sidebar-home flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-sm font-medium transition-all group' expr:href='data:blog.homepageUrl'>
+            <i class='fa-solid fa-house-chimney w-5 text-center text-base text-unicef-DEFAULT'/>
+            <span class='sidebar-label font-semibold'>Home</span>
+          </a>
+
+<script type='text/javascript'>
+//<![CDATA[
+    function bloggerNetworkStatus() {
+        return {
+            clientIp: 'Fetching...',
+            isSynced: false,
+            
+            async init() {
+                try {
+                    let response = await fetch('https://api.ipify.org?format=json');
+                    if (!response.ok) throw new Error('Network response failed');
+                    let data = await response.json();
+                    
+                    this.clientIp = data.ip;
+                    this.isSynced = true;
+                } catch (error) {
+                    this.clientIp = 'Offline / Blocked';
+                    this.isSynced = false;
+                }
+            },
+
+            get syncIndicatorClass() {
+                return this.isSynced ? 'bg-green-500' : 'bg-red-500';
+            },
+
+            get syncStatusText() {
+                return this.isSynced ? 'Status: Synced & Connected' : 'Status: Connection Error';
+            }
+        }
+    }
+//]]>
+</script>
+
+          <b:section id='sidebarmenu' showaddelement='yes'/>
+        </div>
+      </div>
+
+      <div class='sidebar-status-wrap p-4 border-t flex items-center justify-between'>
+        <div class='sidebar-status flex items-center gap-3 overflow-hidden'>
+                    
+          <div class='w-8 h-8 rounded-full theme-primary-bg flex items-center justify-center text-white text-xs shrink-0 shadow-sm'>
+<button aria-label='Toggle dark mode' class='theme-toggle' id='themeToggle' onclick='toggleTheme()' type='button'><i class='fa-solid fa-moon' id='themeIcon'/></button>
+          </div>
+          <div class='truncate'>
+<!-- Network IP & Sync Badge Component -->
+&lt;div x-data=&quot;bloggerNetworkStatus()&quot; x-init=&quot;init()&quot; class=&quot;inline-block&quot;&gt;
+    &lt;div class=&quot;flex items-center gap-1.5 bg-gray-100 border border-gray-200 px-2.5 py-1 rounded text-xs text-gray-700 shadow-sm&quot; title=&quot;Network IP &amp; Sync Status&quot;&gt;
+        &lt;i class=&quot;fa-solid fa-network-wired text-blue-500&quot;&gt;&lt;/i&gt;
+        &lt;span class=&quot;font-mono font-medium&quot; x-text=&quot;clientIp&quot;&gt;Loading...&lt;/span&gt;
+        &lt;span class=&quot;inline-block w-2 h-2 rounded-full transition-colors duration-300&quot; :class=&quot;syncIndicatorClass&quot; :title=&quot;syncStatusText&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+          </div>
+        </div>
+        <button aria-label='Toggle Sidebar' class='sidebar-toggle text-slate-400 hover:text-unicef-DEFAULT p-2 rounded-xl hover:bg-slate-200/50 transition-all hidden lg:block mx-auto lg:mx-0' onclick='toggleSidebar()' type='button'>
+          <i class='fa-solid fa-angles-left text-sm transition-transform duration-300' id='sidebarToggleIcon'/>
+        </button>
+      </div>
+    </aside>
+
+    <main class='flex-1 min-w-0 flex flex-col min-h-screen transition-all duration-300' style='background:var(--page)'>
+        <b:section class='w-full px-0 space-y-8 flex-1' id='mainblogsection' showaddelement='yes'>
+          <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog' version='2' visible='true'>
+            <b:widget-settings>
+              <b:widget-setting name='showDateHeader'>false</b:widget-setting>
+              <b:widget-setting name='style.textcolor'>#ffffff</b:widget-setting>
+              <b:widget-setting name='showShareButtons'>false</b:widget-setting>
+              <b:widget-setting name='authorLabel'/>
+              <b:widget-setting name='showCommentLink'>true</b:widget-setting>
+              <b:widget-setting name='style.urlcolor'>#ffffff</b:widget-setting>
+              <b:widget-setting name='showAuthor'>false</b:widget-setting>
+              <b:widget-setting name='style.linkcolor'>#ffffff</b:widget-setting>
+              <b:widget-setting name='style.unittype'>TextAndImage</b:widget-setting>
+              <b:widget-setting name='style.bgcolor'>#ffffff</b:widget-setting>
+              <b:widget-setting name='timestampLabel'/>
+              <b:widget-setting name='reactionsLabel'/>
+              <b:widget-setting name='showAuthorProfile'>false</b:widget-setting>
+              <b:widget-setting name='style.layout'>1x1</b:widget-setting>
+              <b:widget-setting name='showLabels'>true</b:widget-setting>
+              <b:widget-setting name='showLocation'>true</b:widget-setting>
+              <b:widget-setting name='postLabelsLabel'/>
+              <b:widget-setting name='showTimestamp'>true</b:widget-setting>
+              <b:widget-setting name='postsPerAd'>1</b:widget-setting>
+              <b:widget-setting name='showBacklinks'>false</b:widget-setting>
+              <b:widget-setting name='style.bordercolor'>#ffffff</b:widget-setting>
+              <b:widget-setting name='showInlineAds'>false</b:widget-setting>
+              <b:widget-setting name='showReactions'>false</b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main'>
+              <b:loop values='data:posts' var='post'>
+                <article class='post-card'>
+                  <data:post.body/>
+                </article>
+              </b:loop>
+            </b:includable>
+            <b:includable id='aboutPostAuthor'>
+  <div class='author-name'>
+    <a class='g-profile' expr:href='data:post.author.profileUrl' rel='author' title='author profile'>
+      <span>
+        <data:post.author.name/>
+      </span>
+    </a>
+  </div>
+  <div>
+    <span class='author-desc'>
+      <data:post.author.aboutMe/>
+    </span>
+  </div>
+</b:includable>
+            <b:includable id='addComments'>
+              <a expr:href='data:post.commentsUrl' expr:onclick='data:post.commentsUrlOnclick'>
+                <b:message name='messages.postAComment'/>
+              </a>
+            </b:includable>
+            <b:includable id='blogThisShare'>
+              <b:with value='&quot;window.open(this.href, &quot;_blank&quot;, &quot;height=270,width=475&quot;); return false;&quot;' var='onclick'>
+                <b:include name='platformShare'/>
+              </b:with>
+            </b:includable>
+            <b:includable id='bylineByName' var='byline'>
+              <b:switch var='data:byline.name'>
+                <b:case value='share'/>
+                  <b:include cond='data:post.shareUrl' name='postShareButtons'/>
+                <b:case value='comments'/>
+                  <b:include cond='data:post.allowComments' name='postCommentsLink'/>
+                <b:case value='location'/>
+                  <b:include cond='data:post.location' name='postLocation'/>
+                <b:case value='timestamp'/>
+                  <b:include cond='not data:view.isPage' name='postTimestamp'/>
+                <b:case value='author'/>
+                  <b:include name='postAuthor'/>
+                <b:case value='labels'/>
+                  <b:include cond='data:post.labels' name='postLabels'/>
+                <b:case value='icons'/>
+                  <b:include cond='data:post.emailPostUrl' name='emailPostIcon'/>
+              </b:switch>
+            </b:includable>
+            <b:includable id='bylineRegion' var='regionItems'>
+              <b:loop values='data:regionItems' var='byline'>
+                <b:include data='byline' name='bylineByName'/>
+              </b:loop>
+            </b:includable>
+            <b:includable id='commentAuthorAvatar'>
+              <div class='avatar-image-container'>
+                <img class='author-avatar' expr:src='data:comment.authorAvatarSrc' height='35' width='35'/>
+              </div>
+            </b:includable>
+            <b:includable id='commentDeleteIcon' var='comment'>
+              <span expr:class='&quot;item-control &quot; + data:comment.adminClass'>
+                <b:if cond='data:showCmtPopup'>
+                  <div class='goog-toggle-button'>
+                    <div class='goog-inline-block comment-action-icon'/>
+                  </div>
+                <b:else/>
+                  <a class='comment-delete' expr:href='data:comment.deleteUrl' expr:title='data:messages.deleteComment'>
+                    <img src='https://resources.blogblog.com/img/icon_delete13.gif'/>
+                  </a>
+                </b:if>
+              </span>
+            </b:includable>
+            <b:includable id='commentForm' var='post'>
+              <div class='comment-form'>
+                <a name='comment-form'/>
+                <h4 id='comment-post-message'><data:messages.postAComment/></h4>
+                <b:if cond='data:this.messages.blogComment != &quot;&quot;'>
+                  <p><data:this.messages.blogComment/></p>
+                </b:if>
+                <b:include data='post' name='commentFormIframeSrc'/>
+                <iframe allowtransparency='allowtransparency' class='blogger-iframe-colorize blogger-comment-from-post' expr:height='data:cmtIframeInitialHeight ?: &quot;90px&quot;' frameborder='0' id='comment-editor' name='comment-editor' src='' width='100%'/>
+                <data:post.cmtfpIframe/>
+                <script type='text/javascript'>
+                  BLOG_CMT_createIframe(&#39;<data:post.appRpcRelayPath/>&#39;);
+                </script>
+              </div>
+            </b:includable>
+            <b:includable id='commentFormIframeSrc' var='post'>
+              <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
+            </b:includable>
+            <b:includable id='commentItem' var='comment'>
+              <div class='comment' expr:id='&quot;c&quot; + data:comment.id'>
+                <b:include cond='data:blog.enabledCommentProfileImages' name='commentAuthorAvatar'/>
+                <div class='comment-block'>
+                  <div class='comment-author'>
+                    <b:if cond='data:comment.authorUrl'>
+                      <b:message name='messages.authorSaidWithLink'>
+                        <b:param expr:value='data:comment.author' name='authorName'/>
+                        <b:param expr:value='data:comment.authorUrl' name='authorUrl'/>
+                      </b:message>
+                    <b:else/>
+                      <b:message name='messages.authorSaid'>
+                        <b:param expr:value='data:comment.author' name='authorName'/>
+                      </b:message>
+                    </b:if>
+                  </div>
+                  <div expr:class='&quot;comment-body&quot; + (data:comment.isDeleted ? &quot; deleted&quot; : &quot;&quot;)'>
+                    <data:comment.body/>
+                  </div>
+                  <div class='comment-footer'>
+                    <span class='comment-timestamp'>
+                      <a expr:href='data:comment.url' title='comment permalink'>
+                        <data:comment.timestamp/>
+                      </a>
+                      <b:include data='comment' name='commentDeleteIcon'/>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </b:includable>
+            <b:includable id='commentList' var='comments'>
+              <div id='comments-block'>
+                <b:loop values='data:comments' var='comment'>
+                  <b:include data='comment' name='commentItem'/>
+                </b:loop>
+              </div>
+            </b:includable>
+            <b:includable id='commentPicker' var='post'>
+              <b:if cond='data:post.showThreadedComments'>
+                <b:include data='post' name='threadedComments'/>
+              <b:else/>
+                <b:include data='post' name='comments'/>
+              </b:if>
+            </b:includable>
+            <b:includable id='comments' var='post'>
+              <section expr:class='&quot;comments&quot; + (data:post.embedCommentForm ? &quot; embed&quot; : &quot;&quot;)' expr:data-num-comments='data:post.numberOfComments' id='comments'>
+                <a name='comments'/>
+                <b:if cond='data:post.allowComments'>
+                  <b:include name='commentsTitle'/>
+                  <div expr:id='data:widget.instanceId + &quot;_comments-block-wrapper&quot;'>
+                    <b:include cond='data:post.comments' data='post.comments' name='commentList'/>
+                  </div>
+                  <b:if cond='data:post.commentPagingRequired'>
+                    <div class='paging-control-container'>
+                      <b:if cond='data:post.hasOlderLinks'>
+                        <a expr:class='data:post.oldLinkClass' expr:href='data:post.oldestLinkUrl'><data:messages.oldest/></a>
+                        <a expr:class='data:post.oldLinkClass' expr:href='data:post.olderLinkUrl'><data:messages.older/></a>
+                      </b:if>
+                      <span class='comment-range-text'><data:post.commentRangeText/></span>
+                      <b:if cond='data:post.hasNewerLinks'>
+                        <a expr:class='data:post.newLinkClass' expr:href='data:post.newerLinkUrl'><data:messages.newer/></a>
+                        <a expr:class='data:post.newLinkClass' expr:href='data:post.newestLinkUrl'><data:messages.newest/></a>
+                      </b:if>
+                    </div>
+                  </b:if>
+                  <div class='footer'>
+                    <b:if cond='data:post.embedCommentForm'>
+                      <b:if cond='data:post.allowNewComments'>
+                        <b:include data='post' name='commentForm'/>
+                      <b:else/>
+                        <data:post.noNewCommentsText/>
+                      </b:if>
+                    <b:else/>
+                      <b:if cond='data:post.allowComments'>
+                        <b:include data='post' name='addComments'/>
+                      </b:if>
+                    </b:if>
+                  </div>
+                </b:if>
+                <b:if cond='data:showCmtPopup'>
+                  <div id='comment-popup'>
+                    <iframe allowtransparency='allowtransparency' frameborder='0' id='comment-actions' name='comment-actions' scrolling='no'/>
+                  </div>
+                </b:if>
+              </section>
+            </b:includable>
+            <b:includable id='commentsLink'>
+              <a class='comment-link' expr:href='data:post.commentsUrl' expr:onclick='data:post.commentsUrlOnclick'>
+                <b:if cond='data:post.numberOfComments &gt; 0'>
+                  <b:message name='messages.numberOfComments'>
+                    <b:param expr:value='data:post.numberOfComments' name='numComments'/>
+                  </b:message>
+                <b:else/>
+                  <data:messages.postAComment/>
+                </b:if>
+              </a>
+            </b:includable>
+            <b:includable id='commentsLinkIframe'/>
+            <b:includable id='commentsTitle'>
+              <h3 class='title'><data:messages.comments/></h3>
+            </b:includable>
+            <b:includable id='defaultAdUnit'>
+              <ins class='adsbygoogle' data-ad-format='auto' expr:data-ad-client='data:adClientId ?: data:blog.adsenseClientId' expr:data-ad-host='data:blog.adsenseHostId' expr:style='data:style ?: &quot;display: block;&quot;'>
+                <b:attr cond='not data:blog.analytics4' expr:value='data:blog.analyticsAccountNumber' name='data-analytics-uacct'/>
+              </ins>
+              <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+            </b:includable>
+            <b:includable id='emailPostIcon'>
+              <span class='byline post-icons'>
+                <span class='item-action'>
+                  <a expr:href='data:post.emailPostUrl' expr:title='data:messages.emailPost'>
+                    <b:include data='{ iconClass: &quot;touch-icon sharing-icon&quot; }' name='emailIcon'/>
+                  </a>
+                </span>
+              </span>
+            </b:includable>
+            <b:includable id='facebookShare'>
+              <b:with value='&quot;window.open(this.href, &quot;_blank&quot;, &quot;height=430,width=640&quot;); return false;&quot;' var='onclick'>
+                <b:include name='platformShare'/>
+              </b:with>
+            </b:includable>
+            <b:includable id='feedLinks'>
+              <b:if cond='!data:view.isPost'>
+                <b:if cond='data:feedLinks'>
+                  <div class='blog-feeds'>
+                    <b:include data='feedLinks' name='feedLinksBody'/>
+                  </div>
+                </b:if>
+              <b:else/>
+                <div class='post-feeds'>
+                  <b:loop values='data:posts' var='post'>
+                    <b:if cond='data:post.allowComments and data:post.feedLinks'>
+                      <b:include data='post.feedLinks' name='feedLinksBody'/>
+                    </b:if>
+                  </b:loop>
+                </div>
+              </b:if>
+            </b:includable>
+            <b:includable id='feedLinksBody' var='links'>
+              <div class='feed-links'>
+                <data:messages.subscribeTo/>
+                <b:loop values='data:links' var='f'>
+                  <a class='feed-link' expr:href='data:f.url' expr:type='data:f.mimeType' target='_blank'><data:f.name/> (<data:f.feedType/>)</a>
+                </b:loop>
+              </div>
+            </b:includable>
+            <b:includable id='footerBylines'>
+              <b:if cond='data:widgets.Blog.first.footerBylines'>
+                <b:loop index='i' values='data:widgets.Blog.first.footerBylines' var='region'>
+                  <b:if cond='not data:region.items.empty'>
+                    <div expr:class='&quot;post-footer-line post-footer-line-&quot; + (data:i + 1)'>
+                      <b:with value='&quot;footer-&quot; + (data:i + 1)' var='regionName'>
+                        <b:include data='region.items' name='bylineRegion'/>
+                      </b:with>
+                    </div>
+                  </b:if>
+                </b:loop>
+              </b:if>
+            </b:includable>
+            <b:includable id='googlePlusShare'/>
+            <b:includable id='headerByline'>
+              <b:if cond='data:widgets.Blog.first.headerByline'>
+                <div class='post-header'>
+                  <div class='post-header-line-1'>
+                    <b:with value='&quot;header-1&quot;' var='regionName'>
+                      <b:include data='data:widgets.Blog.first.headerByline.items' name='bylineRegion'/>
+                    </b:with>
+                  </div>
+                </div>
+              </b:if>
+            </b:includable>
+            <b:includable id='homePageLink'>
+              <a class='home-link' expr:href='data:blog.homepageUrl'>
+                <data:messages.home/>
+              </a>
+            </b:includable>
+            <b:includable id='iframeComments' var='post'/>
+            <b:includable id='inlineAd' var='post'>
+              <b:if cond='!data:view.isPreview'>
+                <b:if cond='data:this.adCode or data:this.adClientId or data:blog.adsenseClientId'>
+                  <div class='inline-ad'>
+                    <b:if cond='data:this.adCode != &quot;&quot;'>
+                      <data:this.adCode/>
+                    <b:else/>
+                      <b:include cond='data:this.adClientId or data:blog.adsenseClientId' name='defaultAdUnit'/>
+                    </b:if>
+                  </div>
+                </b:if>
+              <b:else/>
+                <div class='inline-ad'>
+                  <div class='inline-ad-placeholder'>
+                    <span><b:message name='messages.adsGoHere'/></span>
+                  </div>
+                </div>
+              </b:if>
+            </b:includable>
+            <b:includable id='linkShare'>
+              <b:with value='&quot;window.prompt(&quot;Copy to clipboard: Ctrl+C, Enter&quot;, &quot;&quot; + data:originalUrl + &quot;&quot;); return false;&quot;' var='onclick'>
+                <b:include name='platformShare'/>
+              </b:with>
+            </b:includable>
+            <b:includable id='nextPageLink'>
+              <a class='blog-pager-older-link' expr:href='data:olderPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-older-link&quot;' expr:title='data:messages.olderPosts'>
+                <data:messages.olderPosts/>
+              </a>
+            </b:includable>
+            <b:includable id='otherSharingButton'>
+              <span class='sharing-platform-button sharing-element-other' expr:aria-label='data:messages.shareToOtherApps.escaped' expr:data-url='data:originalUrl' expr:title='data:messages.shareToOtherApps.escaped' role='menuitem' tabindex='-1'>
+                <b:with value='{key: &quot;sharingOther&quot;}' var='platform'>
+                  <b:include name='sharingPlatformIcon'/>
+                </b:with>
+                <span class='platform-sharing-text'><data:messages.shareOtherApps.escaped/></span>
+              </span>
+            </b:includable>
+            <b:includable id='platformShare'>
+              <a expr:class='&quot;goog-inline-block sharing-&quot; + data:platform.key' expr:data-url='data:originalUrl' expr:href='data:shareUrl + &quot;&amp;target=&quot; + data:platform.target' expr:onclick='data:onclick ? data:onclick : &quot;&quot;' expr:title='data:platform.shareMessage' target='_blank'>
+                <span class='share-button-link-text'><data:platform.shareMessage/></span>
+            </a>
+            </b:includable>
+            <b:includable id='post' var='post'>
+              <div class='post'>
+                <b:include data='post' name='postMeta'/>
+                <b:include data='post' name='postTitle'/>
+                <b:include name='headerByline'/>
+                <b:if cond='data:view.isSingleItem'>
+                  <b:include data='post' name='postBody'/>
+                <b:else/>
+                  <b:include data='post' name='postBodySnippet'/>
+                  <b:include data='post' name='postJumpLink'/>
+                </b:if>
+                <b:include data='post' name='postFooter'/>
+              </div>
+            </b:includable>
+            <b:includable id='postAuthor'>
+              <span class='byline post-author vcard'>
+                <span class='post-author-label'><data:byline.label/></span>
+                <span class='fn'>
+                  <b:if cond='data:post.author.profileUrl'>
+                    <meta expr:content='data:post.author.profileUrl'/>
+                    <a class='g-profile' expr:href='data:post.author.profileUrl' rel='author' title='author profile'>
+                      <span><data:post.author.name/></span>
+                    </a>
+                  <b:else/>
+                    <span><data:post.author.name/></span>
+                  </b:if>
+                </span>
+              </span>
+            </b:includable>
+            <b:includable id='postBody' var='post'>
+              <div class='post-body entry-content float-container' expr:id='&quot;post-body-&quot; + data:post.id'>
+                <data:post.body/>
+              </div>
+            </b:includable>
+            <b:includable id='postBodySnippet' var='post'>
+              <b:include data='post' name='postBody'/>
+            </b:includable>
+            <b:includable id='postCommentsAndAd' var='post'>
+              <article class='post-outer-container'>
+                <div class='post-outer'>
+                  <b:include data='post' name='post'/>
+                </div>
+                <b:include cond='data:view.isSingleItem' data='post' name='commentPicker'/>
+                <b:include cond='data:view.isSingleItem and data:post.includeAd' data='post' name='inlineAd'/>
+              </article>
+              <b:include cond='data:view.isMultipleItems and data:post.includeAd' data='post' name='inlineAd'/>
+            </b:includable>
+            <b:includable id='postCommentsLink'>
+              <b:if cond='data:view.isMultipleItems'>
+                <span class='byline post-comment-link container'>
+                  <b:include cond='data:post.commentSource != 1' name='commentsLink'/>
+                </span>
+              </b:if>
+            </b:includable>
+            <b:includable id='postFooter' var='post'>
+              <div class='post-footer'>
+                <b:include name='footerBylines'/>
+                <b:include data='post' name='postFooterAuthorProfile'/>
+              </div>
+            </b:includable>
+            <b:includable id='postFooterAuthorProfile' var='post'>
+              <b:if cond='data:post.author.aboutMe and data:view.isPost'>
+                <div class='author-profile'>
+                  <b:if cond='data:post.author.authorPhoto.url'>
+                    <img class='author-image' expr:src='data:post.author.authorPhoto.url' width='50px'/>
+                    <div class='author-about'>
+                      <b:include data='post' name='aboutPostAuthor'/>
+                    </div>
+                  <b:else/>
+                    <b:include data='post' name='aboutPostAuthor'/>
+                  </b:if>
+                </div>
+              </b:if>
+            </b:includable>
+            <b:includable id='postHeader' var='post'>
+              <b:include name='headerByline'/>
+            </b:includable>
+            <b:includable id='postJumpLink' var='post'>
+              <div class='jump-link flat-button'>
+                <a expr:href='data:post.url fragment &quot;more&quot;' expr:title='data:post.title'>
+                  <b:eval expr='data:blog.jumpLinkMessage'/>
+                </a>
+              </div>
+            </b:includable>
+            <b:includable id='postLabels'>
+              <span class='byline post-labels'>
+                <span class='byline-label'><data:byline.label/></span>
+                <b:loop index='i' values='data:post.labels' var='label'>
+                  <a expr:href='data:label.url' rel='tag'><data:label.name/></a>
+                </b:loop>
+              </span>
+            </b:includable>
+            <b:includable id='postLocation'>
+              <span class='byline post-location'>
+                <data:byline.label/>
+                <a expr:href='data:post.location.mapsUrl' target='_blank'><data:post.location.name/></a>
+              </span>
+            </b:includable>
+            <b:includable id='postMeta' var='post'>
+              <b:include data='post' name='postMetadataJSON'/>
+            </b:includable>
+            <b:includable id='postMetadataJSONImage'>
+              &quot;image&quot;: {
+                &quot;@type&quot;: &quot;ImageObject&quot;,
+                <b:if cond='data:post.featuredImage.isResizable'>
+                  &quot;url&quot;: &quot;<b:eval expr='resizeImage(data:post.featuredImage, 1200, &quot;1200:630&quot;)'/>&quot;,
+                  &quot;height&quot;: 630,
+                  &quot;width&quot;: 1200
+                <b:else/>
+                  &quot;url&quot;: &quot;https://blogger.googleusercontent.com/img/b/U2hvZWJveA/AVvXsEgfMvYAhAbdHksiBA24JKmb2Tav6K0GviwztID3Cq4VpV96HaJfy0viIu8z1SSw_G9n5FQHZWSRao61M3e58ImahqBtr7LiOUS6m_w59IvDYwjmMcbq3fKW4JSbacqkbxTo8B90dWp0Cese92xfLMPe_tg11g/w1200/",
+                  &quot;height&quot;: 348,
+                  &quot;width&quot;: 1200
+                </b:if>
+              },
+            </b:includable>
+            <b:includable id='postMetadataJSONPublisher'>
+              &quot;publisher&quot;: {
+                &quot;@type&quot;: &quot;Organization&quot;,
+                &quot;name&quot;: &quot;Blogger&quot;,
+                &quot;logo&quot;: {
+                  &quot;@type&quot;: &quot;ImageObject&quot;,
+                  &quot;url&quot;: &quot;https://blogger.googleusercontent.com/img/b/U2hvZWJveA/AVvXsEgfMvYAhAbdHksiBA24JKmb2Tav6K0GviwztID3Cq4VpV96HaJfy0viIu8z1SSw_G9n5FQHZWSRao61M3e58ImahqBtr7LiOUS6m_w59IvDYwjmMcbq3fKW4JSbacqkbxTo8B90dWp0Cese92xfLMPe_tg11g/h60/",
+                  &quot;width&quot;: 206,
+                  &quot;height&quot;: 60
+                }
+              },
+            </b:includable>
+            <b:includable id='postPagination'>
+              <div class='blog-pager container' id='blog-pager'>
+                <b:include cond='data:newerPageUrl' name='previousPageLink'/>
+                <b:include cond='data:olderPageUrl' name='nextPageLink'/>
+                <b:include cond='data:view.url != data:blog.homepageUrl' name='homePageLink'/>
+              </div>
+            </b:includable>
+            <b:includable id='postReactions'/>
+            <b:includable id='postShareButtons'>
+              <div class='byline post-share-buttons goog-inline-block'>
+                <b:with value='data:sharingId ?: ((data:widget.instanceId ?: &quot;sharing&quot;) + &quot;-&quot; + (data:regionName ?: &quot;byline&quot;) + &quot;-&quot; + data:post.id)' var='sharingId'>
+                  <b:include data='{ sharingId: data:sharingId, originalUrl: data:post.url, platforms: data:this.sharing.platforms, shareUrl: data:post.shareUrl, shareTitle: data:post.title }' name='sharingButtons'/>
+                </b:with>
+              </div>
+            </b:includable>
+            <b:includable id='postTimestamp'>
+              <span class='byline post-timestamp'>
+                <data:byline.label/>
+                <b:if cond='data:post.url'>
+                  <meta expr:content='data:post.url.canonical'/>
+                  <a class='timestamp-link' expr:href='data:post.url' rel='bookmark' title='permanent link'>
+                    <time class='published' expr:datetime='data:post.date.iso8601' expr:title='data:post.date.iso8601'>
+                      <data:post.date/>
+                    </time>
+                  </a>
+                </b:if>
+              </span>
+            </b:includable>
+            <b:includable id='postTitle' var='post'>
+              <a expr:name='data:post.id'/>
+              <b:if cond='data:post.title != &quot;&quot;'>
+                <h3 class='post-title entry-title'>
+                  <b:if cond='data:post.link or (data:post.url and data:view.url != data:post.url)'>
+                    <a expr:href='data:post.link ?: data:post.url'><data:post.title/></a>
+                  <b:else/>
+                    <data:post.title/>
+                  </b:if>
+                </h3>
+              </b:if>
+            </b:includable>
+            <b:includable id='previousPageLink'>
+              <a class='blog-pager-newer-link' expr:href='data:newerPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-newer-link&quot;' expr:title='data:messages.newerPosts'>
+                <data:messages.newerPosts/>
+              </a>
+            </b:includable>
+            <b:includable id='sharingButton'>
+              <span expr:aria-label='data:platform.shareMessage' expr:class='&quot;sharing-platform-button sharing-element-&quot; + data:platform.key' expr:data-href='data:shareUrl + &quot;&amp;target=&quot; + data:platform.target' expr:data-url='data:originalUrl' expr:title='data:platform.shareMessage' role='menuitem' tabindex='-1'>
+                <b:include name='sharingPlatformIcon'/>
+                <span class='platform-sharing-text'><data:platform.name/></span>
+              </span>
+            </b:includable>
+            <b:includable id='sharingButtonContent'>
+              <div class='flat-icon-button ripple'>
+                <b:include name='shareIcon'/>
+              </div>
+            </b:includable>
+            <b:includable id='sharingButtons'>
+              <div class='sharing' expr:aria-owns='&quot;sharing-popup-&quot; + data:sharingId' expr:data-title='data:shareTitle'>
+                <button class='sharing-button touch-icon-button' expr:aria-controls='&quot;sharing-popup-&quot; + data:sharingId' expr:aria-label='data:messages.share.escaped' expr:id='&quot;sharing-button-&quot; + data:sharingId' role='button'>
+                  <b:include name='sharingButtonContent'/>
+                </button>
+                <b:include name='sharingButtonsMenu'/>
+              </div>
+            </b:includable>
+            <b:includable id='sharingButtonsMenu'>
+              <div class='share-buttons-container'>
+                <ul aria-hidden='true' class='share-buttons hidden' expr:aria-label='data:messages.share.escaped' expr:id='&quot;sharing-popup-&quot; + data:sharingId' role='menu'>
+                  <b:loop values='(data:platforms ?: data:blog.sharing.platforms) filter (p =&gt; p.key not in {&quot;blogThis&quot;})' var='platform'>
+                    <li>
+                      <b:include name='sharingButton'/>
+                    </li>
+                  </b:loop>
+                  <li aria-hidden='true' class='hidden'>
+                    <b:include name='otherSharingButton'/>
+                  </li>
+                </ul>
+              </div>
+            </b:includable>
+            <b:includable id='sharingPlatformIcon'>
+              <b:include data='{ iconClass: (&quot;touch-icon sharing-&quot; + data:platform.key) }' expr:name='data:platform.key + &quot;Icon&quot;'/>
+            </b:includable>
+            <b:includable id='threadedCommentForm' var='post'>
+              <div class='comment-form'>
+                <a name='comment-form'/>
+                <h4 id='comment-post-message'><data:messages.postAComment/></h4>
+                <b:if cond='data:this.messages.blogComment != &quot;&quot;'>
+                  <p><data:this.messages.blogComment/></p>
+                </b:if>
+                <b:include data='post' name='commentFormIframeSrc'/>
+                <iframe allowtransparency='allowtransparency' class='blogger-iframe-colorize blogger-comment-from-post' expr:height='data:cmtIframeInitialHeight ?: &quot;90px&quot;' frameborder='0' id='comment-editor' name='comment-editor' src='' width='100%'/>
+                <data:post.cmtfpIframe/>
+                <script type='text/javascript'>
+                  BLOG_CMT_createIframe(&#39;<data:post.appRpcRelayPath/>&#39;);
+                </script>
+              </div>
+            </b:includable>
+            <b:includable id='threadedCommentJs' var='post'>
+              <script async='async' expr:src='data:post.commentSrc' type='text/javascript'/>
+              <b:template-script inline='true' name='threaded_comments'/>
+              <script type='text/javascript'>
+                blogger.widgets.blog.initThreadedComments(
+                    <data:post.commentJso/>,
+                    <data:post.commentMsgs/>,
+                    <data:post.commentConfig/>);
+              </script>
+            </b:includable>
+            <b:includable id='threadedComments' var='post'>
+              <section class='comments threaded' expr:data-embed='data:post.embedCommentForm' expr:data-num-comments='data:post.numberOfComments' id='comments'>
+                <a name='comments'/>
+                <b:include name='commentsTitle'/>
+                <div class='comments-content'>
+                  <b:if cond='data:post.embedCommentForm'>
+                    <b:include data='post' name='threadedCommentJs'/>
+                  </b:if>
+                  <div id='comment-holder'>
+                    <data:post.commentHtml/>
+                  </div>
+                </div>
+                <p class='comment-footer'>
+                  <b:if cond='data:post.allowNewComments'>
+                    <b:include data='post' name='threadedCommentForm'/>
+                  <b:else/>
+                    <data:post.noNewCommentsText/>
+                  </b:if>
+                  <b:if cond='data:post.showManageComments'>
+                    <b:include data='post' name='manageComments'/>
+                  </b:if>
+                </p>
+                <b:if cond='data:showCmtPopup'>
+                  <div id='comment-popup'>
+                    <iframe allowtransparency='allowtransparency' frameborder='0' id='comment-actions' name='comment-actions' scrolling='no'/>
+                  </div>
+                </b:if>
+              </section>
+            </b:includable>
+            <b:includable id='tooltipCss'>
+  <!-- LINT.IfChange -->
+  <style>
+    .post-body a.b-tooltip-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .post-body a.b-tooltip-container .b-tooltip {
+      display: block !important;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translate(-20%, 1px);
+      visibility: hidden;
+      opacity: 0;
+      z-index: 1;
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    .post-body a.b-tooltip-container .b-tooltip iframe {
+      width: 200px;
+      height: 198px;
+      max-width: none;
+      border: none;
+      border-radius: 20px;
+      box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (hover: hover) {
+      .post-body a.b-tooltip-container:hover .b-tooltip {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  </style>
+  <!-- LINT.ThenChange(//depot/google3/java/com/google/blogger/b2/layouts/widgets/v2-style.css) -->
+</b:includable>
+          </b:widget>
+        </b:section>
+    </main>
+
+  </div>
+</div>
+<script>
+/*<![CDATA[*/
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxizUspZtLbsmxI_1LN2X9EhBphfQGxsugjHSYlibLHQGL8RlijV1G7zUkPXy8sxHs/exec";
+
+    const REGISTRY_COLUMNS = [
+        "currently_living","eir_id","beneficiary_name","foolhumaa_form_number",
+        "beneficiary_national_id","dob","sex","atoll_island_residence",
+        "current_address","mother_name","mother_national_id","primary_contact",
+        "caregiver_name","caregiver_id","caregiver_contact","country",
+        "gestational_age_weeks","birth_weight","delivery_mode","number_delivered",
+        "birth_facility","HepB_Within24h","remarks"
+    ];
+
+    const EVENT_COLUMNS = [
+        "visit_date","currently_living","vaccine_centre","eir_id",
+        "foolhumaa_form_number","beneficiary_national_id","beneficiary_name",
+        "dob","age_at_visit","sex",
+        "vaccine_name1","vaccine_type1",
+        "vaccine_name2","vaccine_type2",
+        "vaccine_name3","vaccine_type3",
+        "vaccine_name4","vaccine_type4",
+        "vaccine_name5","vaccine_type5",
+        "vaccine_name6","vaccine_type6"
+    ];
+
+    const EVENT_DISPLAY_COLUMNS = [
+        "event_id",
+        "visit_date","currently_living","vaccine_centre","eir_id",
+        "foolhumaa_form_number","beneficiary_national_id","beneficiary_name",
+        "dob","age_at_visit","sex",
+        "vaccine_name1","vaccine_type1",
+        "vaccine_name2","vaccine_type2",
+        "vaccine_name3","vaccine_type3",
+        "vaccine_name4","vaccine_type4",
+        "vaccine_name5","vaccine_type5",
+        "vaccine_name6","vaccine_type6",
+        "dose_count"
+    ];
+
+    const REGISTRY_FROM_EVENT = [
+        "currently_living","eir_id","beneficiary_name","foolhumaa_form_number",
+        "beneficiary_national_id","dob","sex"
+    ];
+
+    const MAX_DOSES_PER_EVENT = 6;
+    const DEFAULT_DIRECTORY_LIVING = "Sh. Funadhoo";
+
+    const BLANK_REG_FORM = {
+        currently_living:"", eir_id:"", beneficiary_name:"", foolhumaa_form_number:"",
+        beneficiary_national_id:"", dob:"", sex:"", atoll_island_residence:"",
+        current_address:"", mother_name:"", mother_national_id:"", primary_contact:"",
+        caregiver_name:"", caregiver_id:"", caregiver_contact:"", country:"",
+        gestational_age_weeks:"", birth_weight:"", delivery_mode:"", number_delivered:"",
+        birth_facility:"", HepB_Within24h:"", remarks:""
+    };
+
+    function excelDateToISO(val) {
+        if (val === undefined || val === null || val === '') return null;
+        if (val instanceof Date) {
+            if (isNaN(val.getTime())) return null;
+            return val.toISOString().slice(0, 10);
+        }
+        if (typeof val === 'number' && val > 0 && val < 100000) {
+            const ms = Math.round((val - 25569) * 86400 * 1000);
+            const d = new Date(ms);
+            if (isNaN(d.getTime())) return null;
+            return d.toISOString().slice(0, 10);
+        }
+        if (typeof val === 'string') {
+            const s = val.trim();
+            if (!s) return null;
+            if (/^\d{4}-\d{2}-\d{2}/.test(s)) return s.slice(0, 10);
+            const m = s.match(/^(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{2,4})$/);
+            if (m) {
+                let a = parseInt(m[1], 10), b = parseInt(m[2], 10), y = parseInt(m[3], 10);
+                if (y < 100) y += 2000;
+                let day, month;
+                if (a > 12) { day = a; month = b; }
+                else        { month = a; day = b; }
+                const d = new Date(y, month - 1, day);
+                if (isNaN(d.getTime())) return null;
+                const yy = d.getFullYear();
+                const mm = String(d.getMonth() + 1).padStart(2, '0');
+                const dd = String(d.getDate()).padStart(2, '0');
+                return `${yy}-${mm}-${dd}`;
+            }
+            const d = new Date(s);
+            if (isNaN(d.getTime())) return null;
+            return d.toISOString().slice(0, 10);
+        }
+        return null;
+    }
+
+    function calculateAgeBetween(dobStr, targetDateStr) {
+        if (!dobStr || !targetDateStr) return '-';
+        const birth = new Date(dobStr);
+        const target = new Date(targetDateStr);
+        if (isNaN(birth.getTime()) || isNaN(target.getTime())) return '-';
+        if (birth > target) return '-';
+
+        let years = target.getFullYear() - birth.getFullYear();
+        let months = target.getMonth() - birth.getMonth();
+        let days = target.getDate() - birth.getDate();
+
+        if (days < 0) {
+            months -= 1;
+            const prevMonth = new Date(target.getFullYear(), target.getMonth(), 0).getDate();
+            days += prevMonth;
+        }
+        if (months < 0) {
+            years -= 1;
+            months += 12;
+        }
+
+        const totalMonths = years * 12 + months;
+        if (totalMonths < 1) {
+            const diffMs = target - birth;
+            const totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            return totalDays + 'D';
+        }
+        if (years < 1) {
+            return months + 'M ' + days + 'D';
+        }
+        return years + 'Y ' + months + 'M';
+    }
+
+    function formatAgeFromDob(dob) {
+        return calculateAgeBetween(dob, new Date().toISOString().slice(0, 10));
+    }
+
+    function eirApp() {
+        return {
+            db: null,
+            dbStatus: 'Booting...',
+            activeTab: 'records',
+            registryColumns: REGISTRY_COLUMNS,
+            eventColumns: EVENT_DISPLAY_COLUMNS,
+
+            registry: [],
+            events: [],
+            dirSearch: '',
+            dirLivingFilter: DEFAULT_DIRECTORY_LIVING,
+
+            showRegisterModal: false,
+            showSessionModal: false,
+
+            regForm: { ...BLANK_REG_FORM },
+            lookup: { eir_id: '', foolhumaa_form_number: '', beneficiary_national_id: '', status: 'idle', result: null },
+            session: { beneficiary: null },
+            visitForm: {},
+            _lookupTimer: null,
+
+            clientIp: 'Detecting IP...',
+            syncStatus: 'synced',
+            syncStatusText: 'Cloud mirror up to date',
+            get syncIndicatorClass() {
+                if (this.syncStatus === 'synced') return 'bg-green-500';
+                if (this.syncStatus === 'syncing') return 'bg-amber-500 animate-pulse';
+                return 'bg-red-500';
+            },
+
+            formatAge(dob) { return formatAgeFromDob(dob); },
+
+            async initEngine() {
+                this.fetchClientIp();
+                try {
+                    const SQL = await initSqlJs({
+                        locateFile: f => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/${f}`
+                    });
+
+                    const saved = localStorage.getItem('shah_eir_db');
+                    let loaded = false;
+                    if (saved) {
+                        try {
+                            this.db = new SQL.Database(Uint8Array.from(JSON.parse(saved)));
+                            loaded = true;
+                        } catch (e) { console.warn('Corrupt DB, starting fresh:', e); }
+                    }
+                    if (!loaded) this.db = new SQL.Database();
+
+                    this.createTables();
+                    this.visitForm = this.blankVisitForm();
+                    this.refreshAll();
+
+                    await this.hydrateFromCloud();
+                } catch (err) {
+                    console.error(err);
+                    this.dbStatus = 'DB init error: ' + err.message;
+                }
+            },
+
+            async fetchClientIp() {
+                try {
+                    const res = await fetch('https://api.ipify.org?format=json');
+                    const data = await res.json();
+                    this.clientIp = data.ip;
+                } catch (e) {
+                    this.clientIp = 'Offline Mode';
+                }
+            },
+
+            createTables() {
+                this.db.run(`
+                    CREATE TABLE IF NOT EXISTS vaccination_registry (
+                        id TEXT PRIMARY KEY,
+                        currently_living TEXT, eir_id TEXT UNIQUE, beneficiary_name TEXT NOT NULL,
+                        foolhumaa_form_number TEXT, beneficiary_national_id TEXT,
+                        dob TEXT, sex TEXT, atoll_island_residence TEXT, current_address TEXT,
+                        mother_name TEXT, mother_national_id TEXT, primary_contact TEXT,
+                        caregiver_name TEXT, caregiver_id TEXT, caregiver_contact TEXT, country TEXT,
+                        gestational_age_weeks INTEGER, birth_weight REAL, delivery_mode TEXT,
+                        number_delivered INTEGER, birth_facility TEXT, HepB_Within24h TEXT, remarks TEXT,
+                        created_at TEXT DEFAULT (datetime('now'))
+                    );
+                `);
+                this.db.run(`
+                    CREATE TABLE IF NOT EXISTS vaccination_events (
+                        event_id TEXT PRIMARY KEY,
+                        visit_date TEXT, currently_living TEXT, vaccine_centre TEXT,
+                        eir_id TEXT, foolhumaa_form_number TEXT, beneficiary_national_id TEXT,
+                        beneficiary_name TEXT, dob TEXT, age_at_visit TEXT, sex TEXT,
+                        vaccine_name1 TEXT, vaccine_type1 TEXT,
+                        vaccine_name2 TEXT, vaccine_type2 TEXT,
+                        vaccine_name3 TEXT, vaccine_type3 TEXT,
+                        vaccine_name4 TEXT, vaccine_type4 TEXT,
+                        vaccine_name5 TEXT, vaccine_type5 TEXT,
+                        vaccine_name6 TEXT, vaccine_type6 TEXT,
+                        dose_count INTEGER DEFAULT 0,
+                        created_at TEXT DEFAULT (datetime('now'))
+                    );
+                `);
+                try {
+                    this.db.run(`ALTER TABLE vaccination_events ADD COLUMN age_at_visit TEXT;`);
+                } catch (e) {}
+
+                this.db.run(`CREATE INDEX IF NOT EXISTS idx_events_eir ON vaccination_events(eir_id);`);
+                this.db.run(`CREATE INDEX IF NOT EXISTS idx_events_date ON vaccination_events(visit_date);`);
+                this.db.run(`CREATE INDEX IF NOT EXISTS idx_reg_living ON vaccination_registry(currently_living);`);
+                this.persist();
+            },
+
+            refreshAll() {
+                this.loadRegistry();
+                this.loadEvents();
+                this.refreshStatus();
+            },
+            loadRegistry() {
+                this.registry = this.queryAll(`SELECT * FROM vaccination_registry ORDER BY created_at DESC;`);
+            },
+            loadEvents() {
+                this.events = this.queryAll(`SELECT * FROM vaccination_events ORDER BY visit_date DESC, created_at DESC;`);
+            },
+            queryAll(sql, params = []) {
+                const out = [];
+                try {
+                    const stmt = this.db.prepare(sql);
+                    stmt.bind(params);
+                    while (stmt.step()) out.push(stmt.getAsObject());
+                    stmt.free();
+                } catch (e) { console.error(e); }
+                return out;
+            },
+            refreshStatus() {
+                this.dbStatus = `DB ready · ${this.registry.length} registry · ${this.events.length} events`;
+            },
+            persist() {
+                try {
+                    const bytes = this.db.export();
+                    localStorage.setItem('shah_eir_db', JSON.stringify(Array.from(bytes)));
+                    this.backupToCloud();
+                } catch (e) {
+                    console.error('Persist failed:', e);
+                    Swal.fire('Storage Full', 'Could not save — localStorage quota exceeded.', 'error');
+                }
+            },
+            generateId() {
+                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+                    const r = Math.random() * 16 | 0;
+                    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+                    return v.toString(16);
+                });
+            },
+
+            async hydrateFromCloud() {
+                try {
+                    this.syncStatus = 'syncing';
+                    this.syncStatusText = 'Pulling data from Cloud Mirror...';
+                    const res = await fetch(WEB_APP_URL);
+                    const data = await res.json();
+                    
+                    if (data.status === 'success') {
+                        const cloudHasRegistry = data.registry && data.registry.length > 0;
+                        const cloudHasEvents = data.events && data.events.length > 0;
+
+                        if (cloudHasRegistry) {
+                            this.db.run("DELETE FROM vaccination_registry;");
+                            for (const r of data.registry) {
+                                const keys = Object.keys(r).filter(k => REGISTRY_COLUMNS.includes(k) || k === 'id');
+                                const vals = keys.map(k => r[k] !== undefined ? r[k] : null);
+                                this.db.run(`INSERT OR REPLACE INTO vaccination_registry (${keys.join(',')}) VALUES (${keys.map(()=>'?').join(',')});`, vals);
+                            }
+                        }
+
+                        if (cloudHasEvents) {
+                            this.db.run("DELETE FROM vaccination_events;");
+                            for (const ev of data.events) {
+                                const keys = Object.keys(ev).filter(k => EVENT_DISPLAY_COLUMNS.includes(k) || k === 'event_id');
+                                const vals = keys.map(k => ev[k] !== undefined ? ev[k] : null);
+                                this.db.run(`INSERT OR REPLACE INTO vaccination_events (${keys.join(',')}) VALUES (${keys.map(()=>'?').join(',')});`, vals);
+                            }
+                        }
+
+                        this.refreshAll();
+                        this.syncStatus = 'synced';
+                        this.syncStatusText = 'Hydrated & Synced with Cloud Mirror';
+                    }
+                } catch (e) {
+                    this.syncStatus = 'offline';
+                    this.syncStatusText = 'Offline mode';
+                }
+            },
+
+            async backupToCloud() {
+                try {
+                    this.syncStatus = 'syncing';
+                    this.syncStatusText = 'Pushing backup to Cloud Sheet...';
+                    
+                    await fetch(WEB_APP_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ type: 'registry', rows: this.registry })
+                    });
+
+                    await fetch(WEB_APP_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ type: 'events', rows: this.events })
+                    });
+
+                    this.syncStatus = 'synced';
+                    this.syncStatusText = 'Cloud mirror up to date';
+                } catch (e) {
+                    this.syncStatus = 'offline';
+                    this.syncStatusText = 'Sync failed (Offline)';
+                }
+            },
+
+            async manualCloudSync() {
+                Swal.fire({ title: 'Syncing...', text: 'Fetching latest records from Google Sheet mirror.', allowOutsideClick: false, didOpen: () => { Swal.showLoading(); } });
+                await this.hydrateFromCloud();
+                await this.backupToCloud();
+                Swal.fire({ title: 'Sync Complete!', icon: 'success', timer: 1200, showConfirmButton: false });
+            },
+
+            openRegisterModal(prefill = null) {
+                this.regForm = { ...BLANK_REG_FORM, ...(prefill || {}) };
+                this.showRegisterModal = true;
+            },
+            closeRegisterModal() { this.showRegisterModal = false; },
+            submitRegister() {
+                try {
+                    const rec = {};
+                    for (const col of REGISTRY_COLUMNS) {
+                        const v = this.regForm[col];
+                        if (v !== undefined && v !== null && v !== '') rec[col] = v;
+                    }
+                    if (!rec.beneficiary_name || !rec.eir_id) {
+                        Swal.fire('Missing fields', 'Beneficiary Name and EIR ID are required.', 'warning');
+                        return;
+                    }
+                    rec.dob = excelDateToISO(rec.dob);
+                    if (rec.gestational_age_weeks) rec.gestational_age_weeks = parseInt(rec.gestational_age_weeks, 10) || null;
+                    if (rec.birth_weight) rec.birth_weight = parseFloat(rec.birth_weight) || null;
+                    if (rec.number_delivered) rec.number_delivered = parseInt(rec.number_delivered, 10) || null;
+
+                    const existing = this.queryAll(`SELECT id FROM vaccination_registry WHERE eir_id = ? LIMIT 1;`, [rec.eir_id]);
+                    if (existing.length > 0) {
+                        rec.id = existing[0].id;
+                        const updateCols = Object.keys(rec).filter(k => k !== 'id' && k !== 'eir_id');
+                        const setClause = updateCols.map(k => `${k} = ?`).join(', ');
+                        const values = updateCols.map(k => rec[k]);
+                        values.push(rec.eir_id);
+                        this.db.run(`UPDATE vaccination_registry SET ${setClause} WHERE eir_id = ?;`, values);
+                    } else {
+                        rec.id = this.generateId();
+                        const keys = Object.keys(rec);
+                        this.db.run(
+                            `INSERT INTO vaccination_registry (${keys.join(',')}) VALUES (${keys.map(() => '?').join(',')});`,
+                            keys.map(k => rec[k])
+                        );
+                    }
+
+                    this.persist();
+                    this.refreshAll();
+                    this.closeRegisterModal();
+                    Swal.fire('Saved', `"${rec.beneficiary_name}" saved successfully.`, 'success');
+                } catch (err) {
+                    Swal.fire('Registration Failed', err.message, 'error');
+                }
+            },
+
+            openSessionModal(prefillBeneficiary = null) {
+                this.lookup = { eir_id:'', foolhumaa_form_number:'', beneficiary_national_id:'', status:'idle', result:null };
+                this.session.beneficiary = null;
+                this.visitForm = this.blankVisitForm();
+                if (prefillBeneficiary) {
+                    this.session.beneficiary = prefillBeneficiary;
+                    this.visitForm.currently_living = prefillBeneficiary.currently_living || '';
+                }
+                this.showSessionModal = true;
+            },
+            closeSessionModal() {
+                this.showSessionModal = false;
+                this.cancelSession();
+            },
+            cancelSession() {
+                this.session.beneficiary = null;
+                this.lookup = { eir_id:'', foolhumaa_form_number:'', beneficiary_national_id:'', status:'idle', result:null };
+                this.visitForm = this.blankVisitForm();
+            },
+            debouncedLookup() {
+                clearTimeout(this._lookupTimer);
+                this._lookupTimer = setTimeout(() => this.performLookup(), 250);
+            },
+            performLookup() {
+                const e = (this.lookup.eir_id || '').trim();
+                const f = (this.lookup.foolhumaa_form_number || '').trim();
+                const n = (this.lookup.beneficiary_national_id || '').trim();
+                if (!e && !f && !n) {
+                    this.lookup.status = 'idle';
+                    this.lookup.result = null;
+                    return;
+                }
+                this.lookup.status = 'searching';
+                const clauses = [], params = [];
+                if (e) { clauses.push('eir_id = ?'); params.push(e); }
+                if (f) { clauses.push('foolhumaa_form_number = ?'); params.push(f); }
+                if (n) { clauses.push('beneficiary_national_id = ?'); params.push(n); }
+
+                let row = null;
+                try {
+                    const stmt = this.db.prepare(
+                        `SELECT * FROM vaccination_registry WHERE ${clauses.join(' OR ')} LIMIT 1;`
+                    );
+                    stmt.bind(params);
+                    if (stmt.step()) row = stmt.getAsObject();
+                    stmt.free();
+                } catch (err) { console.error(err); }
+                if (row) { this.lookup.result = row; this.lookup.status = 'found'; }
+                else { this.lookup.result = null; this.lookup.status = 'notfound'; }
+            },
+            startSession() {
+                if (!this.lookup.result) return;
+                this.session.beneficiary = this.lookup.result;
+                this.visitForm = this.blankVisitForm();
+                this.visitForm.currently_living = this.lookup.result.currently_living || '';
+            },
+            goToRegisterFromSession() {
+                const prefill = {
+                    eir_id: this.lookup.eir_id || '',
+                    foolhumaa_form_number: this.lookup.foolhumaa_form_number || '',
+                    beneficiary_national_id: this.lookup.beneficiary_national_id || ''
+                };
+                this.closeSessionModal();
+                this.openRegisterModal(prefill);
+                Swal.fire({ title: 'Register New', text: 'Complete registration for this child.', icon: 'info', timer: 1500, showConfirmButton: false });
+            },
+            blankVisitForm() {
+                const f = {
+                    visit_date: new Date().toISOString().slice(0,10),
+                    vaccine_centre: '',
+                    currently_living: ''
+                };
+                for (let i = 1; i <= MAX_DOSES_PER_EVENT; i++) {
+                    f[`vaccine_name${i}`] = '';
+                    f[`vaccine_type${i}`] = '';
+                }
+                return f;
+            },
+            submitVisit() {
+                if (!this.session.beneficiary) return;
+                const b = this.session.beneficiary;
+                const f = this.visitForm;
+                try {
+                    const evRec = { event_id: this.generateId(), dose_count: 0 };
+                    evRec.visit_date = excelDateToISO(f.visit_date);
+                    evRec.vaccine_centre = (f.vaccine_centre || '').trim() || null;
+                    evRec.currently_living = (f.currently_living || '').trim() || (b.currently_living || null);
+                    evRec.eir_id = b.eir_id || null;
+                    evRec.foolhumaa_form_number = b.foolhumaa_form_number || null;
+                    evRec.beneficiary_national_id = b.beneficiary_national_id || null;
+                    evRec.beneficiary_name = b.beneficiary_name || null;
+                    evRec.dob = excelDateToISO(b.dob) || null;
+                    evRec.age_at_visit = calculateAgeBetween(evRec.dob, evRec.visit_date);
+                    evRec.sex = b.sex || null;
+
+                    let dc = 0;
+                    for (let i = 1; i <= MAX_DOSES_PER_EVENT; i++) {
+                        const vn = (f[`vaccine_name${i}`] || '').trim();
+                        const vt = (f[`vaccine_type${i}`] || '').trim();
+                        evRec[`vaccine_name${i}`] = vn || null;
+                        evRec[`vaccine_type${i}`] = vt || null;
+                        if (vn) dc++;
+                    }
+                    evRec.dose_count = dc;
+                    if (dc === 0) {
+                        Swal.fire('No doses', 'Please record at least one vaccine.', 'warning');
+                        return;
+                    }
+                    const keys = Object.keys(evRec);
+                    this.db.run(
+                        `INSERT INTO vaccination_events (${keys.join(',')}) VALUES (${keys.map(() => '?').join(',')});`,
+                        keys.map(k => evRec[k])
+                    );
+                    this.persist();
+                    this.refreshAll();
+                    this.closeSessionModal();
+                    Swal.fire('Visit Saved', `${dc} dose(s) recorded for ${b.beneficiary_name}.`, 'success');
+                } catch (err) {
+                    Swal.fire('Save Failed', err.message, 'error');
+                }
+            },
+
+            downloadRegistryTemplate() {
+                const ws = XLSX.utils.aoa_to_sheet([REGISTRY_COLUMNS]);
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, 'Registry');
+                XLSX.writeFile(wb, 'SHAH-EIR_Registry_Template.xlsx');
+            },
+            downloadEventsTemplate() {
+                const ws = XLSX.utils.aoa_to_sheet([EVENT_COLUMNS]);
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, 'Events');
+                XLSX.writeFile(wb, 'SHAH-EIR_Events_Template.xlsx');
+            },
+
+            importRegistry(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const wb = XLSX.read(new Uint8Array(e.target.result), { type: 'array', cellDates: true });
+                        const sheet = wb.Sheets[wb.SheetNames[0]];
+                        const rows = XLSX.utils.sheet_to_json(sheet, { defval: null, raw: true });
+                        if (!rows.length) {
+                            Swal.fire('Empty file', 'No data rows found.', 'warning');
+                            event.target.value = '';
+                            return;
+                        }
+                        let imported = 0, updated = 0, skipped = 0, reasons = [];
+                        this.db.run("BEGIN TRANSACTION;");
+                        for (const row of rows) {
+                            if (!row.beneficiary_name || !row.eir_id) {
+                                skipped++; reasons.push('Missing beneficiary_name or eir_id');
+                                continue;
+                            }
+                            const rec = {};
+                            for (const col of REGISTRY_COLUMNS) {
+                                if (row[col] !== undefined && row[col] !== null && row[col] !== '') {
+                                    rec[col] = typeof row[col] === 'string' ? row[col].trim() : row[col];
+                                }
+                            }
+
+                            rec.dob = excelDateToISO(rec.dob);
+                            if (rec.gestational_age_weeks) rec.gestational_age_weeks = parseInt(rec.gestational_age_weeks, 10) || null;
+                            if (rec.birth_weight) rec.birth_weight = parseFloat(rec.birth_weight) || null;
+                            if (rec.number_delivered) rec.number_delivered = parseInt(rec.number_delivered, 10) || null;
+
+                            try {
+                                const existing = this.queryAll(`SELECT id FROM vaccination_registry WHERE eir_id = ? LIMIT 1;`, [rec.eir_id]);
+                                if (existing.length > 0) {
+                                    rec.id = existing[0].id;
+                                    const updateCols = Object.keys(rec).filter(k => k !== 'id' && k !== 'eir_id');
+                                    const setClause = updateCols.map(k => `${k} = ?`).join(', ');
+                                    const values = updateCols.map(k => rec[k]);
+                                    values.push(rec.eir_id);
+                                    this.db.run(`UPDATE vaccination_registry SET ${setClause} WHERE eir_id = ?;`, values);
+                                    updated++;
+                                } else {
+                                    rec.id = this.generateId();
+                                    const keys = Object.keys(rec);
+                                    this.db.run(
+                                        `INSERT INTO vaccination_registry (${keys.join(',')}) VALUES (${keys.map(() => '?').join(',')});`,
+                                        keys.map(k => rec[k])
+                                    );
+                                    imported++;
+                                }
+                            } catch (err) {
+                                skipped++;
+                                if (reasons.length < 5) reasons.push(`${rec.eir_id || '?'}: ${err.message}`);
+                            }
+                        }
+                        this.db.run("COMMIT;");
+                        this.persist();
+                        this.refreshAll();
+                        event.target.value = '';
+                        const html = `Imported (New): <b>${imported}</b><br>Updated: <b>${updated}</b><br>Skipped: <b>${skipped}</b>` +
+                            (reasons.length ? `<br><br><span style="font-size:11px;color:#666;">${reasons.join('<br>')}</span>` : '');
+                        Swal.fire({ title: 'Registry Import', html, icon: skipped === 0 ? 'success' : (imported === 0 && updated === 0 ? 'error' : 'warning') });
+                    } catch (err) {
+                        console.error(err);
+                        Swal.fire('Import Failed', 'Could not parse file.', 'error');
+                        event.target.value = '';
+                    }
+                };
+                reader.readAsArrayBuffer(file);
+            },
+
+            importEvents(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const wb = XLSX.read(new Uint8Array(e.target.result), { type: 'array', cellDates: true });
+                        const sheet = wb.Sheets[wb.SheetNames[0]];
+                        const rows = XLSX.utils.sheet_to_json(sheet, { defval: null, raw: true });
+                        if (!rows.length) {
+                            Swal.fire('Empty file', 'No data rows found.', 'warning');
+                            event.target.value = '';
+                            return;
+                        }
+                        let eventsAdded = 0, clientsAdded = 0, skipped = 0, reasons = [];
+                        this.db.run("BEGIN TRANSACTION;");
+                        for (const row of rows) {
+                            if (!row.eir_id || !row.beneficiary_name) {
+                                skipped++; reasons.push('Missing eir_id or beneficiary_name');
+                                continue;
+                            }
+                            const exists = this.queryAll(
+                                `SELECT eir_id, dob FROM vaccination_registry WHERE eir_id = ? LIMIT 1;`,
+                                [row.eir_id]
+                            );
+                            let clientDob = excelDateToISO(row.dob);
+                            if (exists.length > 0) {
+                                if (!clientDob && exists[0].dob) {
+                                    clientDob = exists[0].dob;
+                                }
+                            } else {
+                                const regRec = { id: this.generateId() };
+                                for (const col of REGISTRY_FROM_EVENT) {
+                                    if (row[col] !== undefined && row[col] !== null && row[col] !== '') {
+                                        regRec[col] = typeof row[col] === 'string' ? row[col].trim() : row[col];
+                                    }
+                                }
+                                regRec.dob = clientDob;
+
+                                const k = Object.keys(regRec);
+                                try {
+                                    this.db.run(
+                                        `INSERT INTO vaccination_registry (${k.join(',')}) VALUES (${k.map(() => '?').join(',')});`,
+                                        k.map(x => regRec[x])
+                                    );
+                                    clientsAdded++;
+                                } catch (err) {
+                                    if (reasons.length < 5) reasons.push(`registry ${row.eir_id}: ${err.message}`);
+                                }
+                            }
+
+                            const evRec = { event_id: this.generateId(), dose_count: 0 };
+                            for (const col of EVENT_COLUMNS) {
+                                if (col === 'age_at_visit') continue;
+                                if (row[col] !== undefined && row[col] !== null && row[col] !== '') {
+                                    evRec[col] = typeof row[col] === 'string' ? row[col].trim() : row[col];
+                                } else {
+                                    evRec[col] = null;
+                                }
+                            }
+
+                            evRec.visit_date = excelDateToISO(evRec.visit_date);
+                            evRec.dob        = clientDob;
+                            evRec.age_at_visit = calculateAgeBetween(evRec.dob, evRec.visit_date);
+
+                            let dc = 0;
+                            for (let i = 1; i <= MAX_DOSES_PER_EVENT; i++) {
+                                if (evRec[`vaccine_name${i}`]) dc++;
+                            }
+                            evRec.dose_count = dc;
+
+                            const keys = Object.keys(evRec);
+                            try {
+                                if (row.event_id) {
+                                    const checkEvent = this.queryAll(`SELECT event_id FROM vaccination_events WHERE event_id = ? LIMIT 1;`, [row.event_id]);
+                                    if (checkEvent.length > 0) {
+                                        evRec.event_id = row.event_id;
+                                        const updateCols = keys.filter(k => k !== 'event_id');
+                                        const setClause = updateCols.map(k => `${k} = ?`).join(', ');
+                                        const values = updateCols.map(k => evRec[k]);
+                                        values.push(evRec.event_id);
+                                        this.db.run(`UPDATE vaccination_events SET ${setClause} WHERE event_id = ?;`, values);
+                                        eventsAdded++;
+                                    } else {
+                                        evRec.event_id = row.event_id;
+                                        this.db.run(
+                                            `INSERT INTO vaccination_events (${keys.join(',')}) VALUES (${keys.map(() => '?').join(',')});`,
+                                            keys.map(k => evRec[k])
+                                        );
+                                        eventsAdded++;
+                                    }
+                                } else {
+                                    this.db.run(
+                                        `INSERT INTO vaccination_events (${keys.join(',')}) VALUES (${keys.map(() => '?').join(',')});`,
+                                        keys.map(k => evRec[k])
+                                    );
+                                    eventsAdded++;
+                                }
+                            } catch (err) {
+                                skipped++;
+                                if (reasons.length < 5) reasons.push(`event ${row.eir_id}: ${err.message}`);
+                            }
+                        }
+                        this.db.run("COMMIT;");
+                        this.persist();
+                        this.refreshAll();
+                        event.target.value = '';
+                        const html =
+                            `Events processed: <b>${eventsAdded}</b><br>` +
+                            `New clients added: <b>${clientsAdded}</b><br>` +
+                            `Rows skipped: <b>${skipped}</b>` +
+                            (reasons.length ? `<br><br><span style="font-size:11px;color:#666;">${reasons.join('<br>')}</span>` : '');
+                        Swal.fire({ title: 'Events Import', html, icon: skipped === 0 ? 'success' : (eventsAdded === 0 ? 'error' : 'warning') });
+                    } catch (err) {
+                        console.error(err);
+                        Swal.fire('Import Failed', 'Could not parse file.', 'error');
+                        event.target.value = '';
+                    }
+                };
+                reader.readAsArrayBuffer(file);
+            },
+
+            get distinctLivingValues() {
+                const set = new Set();
+                for (const r of this.registry) {
+                    const v = (r.currently_living || '').trim();
+                    if (v) set.add(v);
+                }
+                return Array.from(set).sort();
+            },
+            get filteredDirectory() {
+                const q = (this.dirSearch || '').toLowerCase().trim();
+                const living = (this.dirLivingFilter || '').trim();
+                return this.registry.filter(r => {
+                    if (living && (r.currently_living || '').trim() !== living) return false;
+                    if (q) {
+                        const hay = [r.beneficiary_name, r.eir_id, r.beneficiary_national_id]
+                            .map(x => (x || '').toLowerCase()).join(' ');
+                        if (!hay.includes(q)) return false;
+                    }
+                    return true;
+                });
+            },
+
+            eventsFor(eirId) {
+                return this.events.filter(e => e.eir_id === eirId).length;
+            },
+            dosesFor(eirId) {
+                return this.events
+                    .filter(e => e.eir_id === eirId)
+                    .reduce((sum, e) => sum + (e.dose_count || 0), 0);
+            },
+            deleteRegistryRow(eirId) {
+                Swal.fire({
+                    title: 'Delete this beneficiary?',
+                    text: 'All linked events will also be removed.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Delete',
+                    confirmButtonColor: '#002F6C'
+                }).then(r => {
+                    if (!r.isConfirmed) return;
+                    this.db.run("DELETE FROM vaccination_events WHERE eir_id = ?;", [eirId]);
+                    this.db.run("DELETE FROM vaccination_registry WHERE eir_id = ?;", [eirId]);
+                    this.persist();
+                    this.refreshAll();
+                    Swal.fire('Deleted', '', 'success');
+                });
+            }
+        };
+    }
+/*]]>*/
+</script>
+<script type='text/javascript'>
+//<![CDATA[
+(function () {
+  'use strict';
+
+  var root = document.documentElement;
+  var sidebar = document.getElementById('appSidebar');
+  var overlay = document.getElementById('mobileOverlay');
+  var themeToggle = document.getElementById('themeToggle');
+  var themeIcon = document.getElementById('themeIcon');
+  var sidebarIcon = document.getElementById('sidebarToggleIcon');
+
+  function savedTheme() {
+    try { return localStorage.getItem('blog-theme'); } catch (e) { return null; }
+  }
+
+  function preferredTheme() {
+    var saved = savedTheme();
+    if (saved === 'light' || saved === 'dark') return saved;
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function applyTheme(theme, persist) {
+    root.setAttribute('data-theme', theme);
+    if (themeIcon) themeIcon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+    if (themeToggle) themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    if (persist) { try { localStorage.setItem('blog-theme', theme); } catch (e) {} }
+  }
+
+  window.toggleTheme = function () {
+    applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark', true);
+  };
+
+  window.toggleSidebar = function () {
+    if (!sidebar) return;
+    if (window.innerWidth < 1024) {
+      openMobileSidebar();
+      return;
+    }
+    sidebar.classList.toggle('collapsed');
+    var collapsed = sidebar.classList.contains('collapsed');
+    if (sidebarIcon) sidebarIcon.className = collapsed ? 'fa-solid fa-angles-right text-sm' : 'fa-solid fa-angles-left text-sm';
+    try { localStorage.setItem('sidebar-collapsed', collapsed ? '1' : '0'); } catch (e) {}
+  };
+
+  window.openMobileSidebar = function () {
+    if (!sidebar || window.innerWidth >= 1024) return;
+    sidebar.classList.add('mobile-open');
+    if (overlay) overlay.classList.add('visible');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeMobileSidebar = function () {
+    if (!sidebar) return;
+    sidebar.classList.remove('mobile-open');
+    if (overlay) overlay.classList.remove('visible');
+    document.body.style.overflow = '';
+  };
+
+  applyTheme(preferredTheme(), false);
+
+  try {
+    if (window.innerWidth >= 1024 && localStorage.getItem('sidebar-collapsed') === '1') {
+      sidebar.classList.add('collapsed');
+      if (sidebarIcon) sidebarIcon.className = 'fa-solid fa-angles-right text-sm';
+    }
+  } catch (e) {}
+
+  window.addEventListener('resize', function () {
+    if (window.innerWidth >= 1024) {
+      closeMobileSidebar();
+    }
+  });
+
+  if (window.matchMedia) {
+    var media = window.matchMedia('(prefers-color-scheme: dark)');
+    media.addEventListener && media.addEventListener('change', function () {
+      if (!savedTheme()) applyTheme(media.matches ? 'dark' : 'light', false);
+    });
+  }
+})();
+//]]>
+</script>
+<!-- App Logic Script -->
+<script type='text/javascript'>
+//<![CDATA[
+/**
+ * ============================================================================
+ * SHAH-EIR &bull; Core Utilities & System Constants (Module 1)
+ * ============================================================================
+ * Handles global configuration endpoints, database schema column definitions,
+ * Excel date serial conversion utilities, and robust age calculation logic.
+ */
+
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxizUspZtLbsmxI_1LN2X9EhBphfQGxsugjHSYlibLHQGL8RlijV1G7zUkPXy8sxHs/exec";
+
+const REGISTRY_COLUMNS = [
+    "currently_living","eir_id","beneficiary_name","foolhumaa_form_number",
+    "beneficiary_national_id","dob","sex","atoll_island_residence",
+    "current_address","mother_name","mother_national_id","primary_contact",
+    "caregiver_name","caregiver_id","caregiver_contact","country",
+    "gestational_age_weeks","birth_weight","delivery_mode","number_delivered",
+    "birth_facility","HepB_Within24h","remarks"
+];
+
+const EVENT_COLUMNS = [
+    "visit_date","currently_living","vaccine_centre","eir_id",
+    "foolhumaa_form_number","beneficiary_national_id","beneficiary_name",
+    "dob","age_at_visit","sex",
+    "vaccine_name1","vaccine_type1","vaccine_name2","vaccine_type2",
+    "vaccine_name3","vaccine_type3","vaccine_name4","vaccine_type4",
+    "vaccine_name5","vaccine_type5","vaccine_name6","vaccine_type6"
+];
+
+const EVENT_DISPLAY_COLUMNS = [
+    "event_id","visit_date","currently_living","vaccine_centre","eir_id",
+    "foolhumaa_form_number","beneficiary_national_id","beneficiary_name",
+    "dob","age_at_visit","sex","vaccine_name1","vaccine_type1",
+    "vaccine_name2","vaccine_type2","vaccine_name3","vaccine_type3",
+    "vaccine_name4","vaccine_type4","vaccine_name5","vaccine_type5",
+    "vaccine_name6","vaccine_type6","dose_count"
+];
+
+const REGISTRY_FROM_EVENT = [
+    "currently_living","eir_id","beneficiary_name","foolhumaa_form_number",
+    "beneficiary_national_id","dob","sex"
+];
+
+const MAX_DOSES_PER_EVENT = 6;
+const DEFAULT_DIRECTORY_LIVING = "Sh. Funadhoo";
+
+const BLANK_REG_FORM = {
+    currently_living:"", eir_id:"", beneficiary_name:"", foolhumaa_form_number:"",
+    beneficiary_national_id:"", dob:"", sex:"", atoll_island_residence:"",
+    current_address:"", mother_name:"", mother_national_id:"", primary_contact:"",
+    caregiver_name:"", caregiver_id:"", caregiver_contact:"", country:"",
+    gestational_age_weeks:"", birth_weight:"", delivery_mode:"", number_delivered:"",
+    birth_facility:"", HepB_Within24h:"", remarks:""
+};
+
+function excelDateToISO(val) {
+    if (val === undefined || val === null || val === '') return null;
+    if (val instanceof Date) {
+        if (isNaN(val.getTime())) return null;
+        return val.toISOString().slice(0, 10);
+    }
+    if (typeof val === 'number' && val > 0 && val < 100000) {
+        const ms = Math.round((val - 25569) * 86400 * 1000);
+        const d = new Date(ms);
+        if (isNaN(d.getTime())) return null;
+        return d.toISOString().slice(0, 10);
+    }
+    if (typeof val === 'string') {
+        const s = val.trim();
+        if (!s) return null;
+        if (/^\d{4}-\d{2}-\d{2}/.test(s)) return s.slice(0, 10);
+        const m = s.match(/^(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{2,4})$/);
+        if (m) {
+            let a = parseInt(m[1], 10), b = parseInt(m[2], 10), y = parseInt(m[3], 10);
+            if (y < 100) y += 2000;
+            let day, month;
+            if (a > 12) { day = a; month = b; }
+            else        { month = a; day = b; }
+            const d = new Date(y, month - 1, day);
+            if (isNaN(d.getTime())) return null;
+            const yy = d.getFullYear();
+            const mm = String(d.getMonth() + 1).padStart(2, '0');
+            const dd = String(d.getDate()).padStart(2, '0');
+            return `${yy}-${mm}-${dd}`;
+        }
+        const d = new Date(s);
+        if (isNaN(d.getTime())) return null;
+        return d.toISOString().slice(0, 10);
+    }
+    return null;
+}
+
+function calculateAgeBetween(dobStr, targetDateStr) {
+    if (!dobStr || !targetDateStr) return '-';
+    const birth = new Date(dobStr);
+    const target = new Date(targetDateStr);
+    if (isNaN(birth.getTime()) || isNaN(target.getTime())) return '-';
+    if (birth > target) return '-';
+
+    let years = target.getFullYear() - birth.getFullYear();
+    let months = target.getMonth() - birth.getMonth();
+    let days = target.getDate() - birth.getDate();
+
+    if (days < 0) {
+        months -= 1;
+        const prevMonth = new Date(target.getFullYear(), target.getMonth(), 0).getDate();
+        days += prevMonth;
+    }
+    if (months < 0) {
+        years -= 1;
+        months += 12;
+    }
+
+    const totalMonths = years * 12 + months;
+    if (totalMonths < 1) {
+        const diffMs = target - birth;
+        const totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+        return totalDays + 'D';
+    }
+    if (years < 1) {
+        return months + 'M ' + days + 'D';
+    }
+    return years + 'Y ' + months + 'M';
+}
+
+function formatAgeFromDob(dob) {
+    return calculateAgeBetween(dob, new Date().toISOString().slice(0, 10));
+}
+//]]>
+</script>
+  
+<script type='text/javascript'>
+//<![CDATA[
+/**
+ * ============================================================================
+ * SHAH-EIR &bull; Database & Cloud Synchronization Module (Module 2)
+ * ============================================================================
+ * Manages in-memory SQLite WASM initialization, high-speed binary persistence,
+ * and background Google Sheets synchronization.
+ */
+const DatabaseModule = {
+    async initDatabase(appContext) {
+        appContext.fetchClientIp();
+        try {
+            // Instant load from memory cache if available
+            if (window.sharedShahDb) {
+                appContext.db = window.sharedShahDb;
+                appContext.visitForm = appContext.blankVisitForm();
+                appContext.refreshAll();
+                appContext.dbStatus = `DB ready (Cached) · ${appContext.registry.length} registry · ${appContext.events.length} events`;
+                await appContext.hydrateFromCloud();
+                return;
+            }
+
+            if (!window.SQL_WASM_LOADED) {
+                window.SQL_WASM_LOADED = await initSqlJs({
+                    locateFile: f => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/${f}`
+                });
+            }
+            const SQL = window.SQL_WASM_LOADED;
+
+            // Load directly from high-speed Base64 binary storage (bypasses JSON parse lag entirely)
+            const savedBin = localStorage.getItem('shah_eir_db_bin');
+            let loaded = false;
+            if (savedBin) {
+                try {
+                    const binaryString = atob(savedBin);
+                    const len = binaryString.length;
+                    const bytes = new Uint8Array(len);
+                    for (let i = 0; i < len; i++) {
+                        bytes[i] = binaryString.charCodeAt(i);
+                    }
+                    appContext.db = new SQL.Database(bytes);
+                    loaded = true;
+                } catch (e) { console.warn('Corrupt Binary DB, starting fresh:', e); }
+            }
+            if (!loaded) appContext.db = new SQL.Database();
+
+            this.createTables(appContext);
+            appContext.visitForm = appContext.blankVisitForm();
+            appContext.refreshAll();
+
+            window.sharedShahDb = appContext.db;
+            await appContext.hydrateFromCloud();
+        } catch (err) {
+            console.error(err);
+            appContext.dbStatus = 'DB init error: ' + err.message;
+        }
+    },
+
+    createTables(ctx) {
+        ctx.db.run(`
+            CREATE TABLE IF NOT EXISTS vaccination_registry (
+                id TEXT PRIMARY KEY,
+                currently_living TEXT, eir_id TEXT UNIQUE, beneficiary_name TEXT NOT NULL,
+                foolhumaa_form_number TEXT, beneficiary_national_id TEXT,
+                dob TEXT, sex TEXT, atoll_island_residence TEXT, current_address TEXT,
+                mother_name TEXT, mother_national_id TEXT, primary_contact TEXT,
+                caregiver_name TEXT, caregiver_id TEXT, caregiver_contact TEXT, country TEXT,
+                gestational_age_weeks INTEGER, birth_weight REAL, delivery_mode TEXT,
+                number_delivered INTEGER, birth_facility TEXT, HepB_Within24h TEXT, remarks TEXT,
+                created_at TEXT DEFAULT (datetime('now'))
+            );
+        `);
+        ctx.db.run(`
+            CREATE TABLE IF NOT EXISTS vaccination_events (
+                event_id TEXT PRIMARY KEY,
+                visit_date TEXT, currently_living TEXT, vaccine_centre TEXT,
+                eir_id TEXT, foolhumaa_form_number TEXT, beneficiary_national_id TEXT,
+                beneficiary_name TEXT, dob TEXT, age_at_visit TEXT, sex TEXT,
+                vaccine_name1 TEXT, vaccine_type1 TEXT, vaccine_name2 TEXT, vaccine_type2 TEXT,
+                vaccine_name3 TEXT, vaccine_type3 TEXT, vaccine_name4 TEXT, vaccine_type4 TEXT,
+                vaccine_name5 TEXT, vaccine_type5 TEXT, vaccine_name6 TEXT, vaccine_type6 TEXT,
+                dose_count INTEGER DEFAULT 0,
+                created_at TEXT DEFAULT (datetime('now'))
+            );
+        `);
+        try { ctx.db.run(`ALTER TABLE vaccination_events ADD COLUMN age_at_visit TEXT;`); } catch (e) {}
+
+        ctx.db.run(`CREATE INDEX IF NOT EXISTS idx_events_eir ON vaccination_events(eir_id);`);
+        ctx.db.run(`CREATE INDEX IF NOT EXISTS idx_events_date ON vaccination_events(visit_date);`);
+        ctx.db.run(`CREATE INDEX IF NOT EXISTS idx_reg_living ON vaccination_registry(currently_living);`);
+        ctx.persist();
+    }
+};
+//]]>
+</script>
+  
+  
+<script type='text/javascript'>
+//<![CDATA[
+/**
+ * ============================================================================
+ * SHAH-EIR &bull; Main Alpine.js Application Component (Module 3)
+ * ============================================================================
+ * Powers user interface reactive data model, table sorting/filtering, and
+ * high-performance local storage serialization.
+ */
+function eirApp() {
+    return {
+        db: null,
+        dbStatus: 'Booting...',
+        activeTab: 'records',
+        registryColumns: REGISTRY_COLUMNS,
+        eventColumns: EVENT_DISPLAY_COLUMNS,
+
+        registry: [],
+        events: [],
+        dirSearch: '',
+        dirLivingFilter: DEFAULT_DIRECTORY_LIVING,
+
+        showRegisterModal: false,
+        showSessionModal: false,
+
+        regForm: { ...BLANK_REG_FORM },
+        lookup: { eir_id: '', foolhumaa_form_number: '', beneficiary_national_id: '', status: 'idle', result: null },
+        session: { beneficiary: null },
+        visitForm: {},
+        _lookupTimer: null,
+
+        clientIp: 'Detecting IP...',
+        syncStatus: 'synced',
+        syncStatusText: 'Cloud mirror up to date',
+        get syncIndicatorClass() {
+            if (this.syncStatus === 'synced') return 'bg-green-500';
+            if (this.syncStatus === 'syncing') return 'bg-amber-500 animate-pulse';
+            return 'bg-red-500';
+        },
+
+        formatAge(dob) { return formatAgeFromDob(dob); },
+
+        async initEngine() {
+            await DatabaseModule.initDatabase(this);
+        },
+
+        async fetchClientIp() {
+            try {
+                const res = await fetch('https://api.ipify.org?format=json');
+                const data = await res.json();
+                this.clientIp = data.ip;
+            } catch (e) {
+                this.clientIp = 'Offline Mode';
+            }
+        },
+
+        refreshAll() {
+            this.loadRegistry();
+            this.loadEvents();
+            this.refreshStatus();
+        },
+        loadRegistry() {
+            this.registry = this.queryAll(`SELECT * FROM vaccination_registry ORDER BY created_at DESC;`);
+        },
+        loadEvents() {
+            this.events = this.queryAll(`SELECT * FROM vaccination_events ORDER BY visit_date DESC, created_at DESC;`);
+        },
+        queryAll(sql, params = []) {
+            const out = [];
+            try {
+                const stmt = this.db.prepare(sql);
+                stmt.bind(params);
+                while (stmt.step()) out.push(stmt.getAsObject());
+                stmt.free();
+            } catch (e) { console.error(e); }
+            return out;
+        },
+        refreshStatus() {
+            this.dbStatus = `DB ready · ${this.registry.length} registry · ${this.events.length} events`;
+        },
+
+        /**
+         * Encodes and persists database binary payload directly using Base64 strings 
+         * for zero-lag storage handling on massive datasets.
+         */
+        persist() {
+            try {
+                const bytes = this.db.export();
+                let binaryString = '';
+                const len = bytes.byteLength;
+                for (let i = 0; i < len; i++) {
+                    binaryString += String.fromCharCode(bytes[i]);
+                }
+                localStorage.setItem('shah_eir_db_bin', btoa(binaryString));
+                this.backupToCloud();
+            } catch (e) {
+                console.error('Persist failed:', e);
+                Swal.fire('Storage Full', 'Could not save — localStorage quota exceeded.', 'error');
+            }
+        },
+
+        generateId() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+                const r = Math.random() * 16 | 0;
+                const v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        },
+
+        async hydrateFromCloud() {
+            try {
+                this.syncStatus = 'syncing';
+                this.syncStatusText = 'Pulling data from Cloud Mirror...';
+                const res = await fetch(WEB_APP_URL);
+                const data = await res.json();
+                
+                if (data.status === 'success') {
+                    if (data.registry && data.registry.length > 0) {
+                        this.db.run("DELETE FROM vaccination_registry;");
+                        for (const r of data.registry) {
+                            const keys = Object.keys(r).filter(k => REGISTRY_COLUMNS.includes(k) || k === 'id');
+                            const vals = keys.map(k => r[k] !== undefined ? r[k] : null);
+                            this.db.run(`INSERT OR REPLACE INTO vaccination_registry (${keys.join(',')}) VALUES (${keys.map(()=>'?').join(',')});`, vals);
+                        }
+                    }
+
+                    if (data.events && data.events.length > 0) {
+                        this.db.run("DELETE FROM vaccination_events;");
+                        for (const ev of data.events) {
+                            const keys = Object.keys(ev).filter(k => EVENT_DISPLAY_COLUMNS.includes(k) || k === 'event_id');
+                            const vals = keys.map(k => ev[k] !== undefined ? ev[k] : null);
+                            this.db.run(`INSERT OR REPLACE INTO vaccination_events (${keys.join(',')}) VALUES (${keys.map(()=>'?').join(',')});`, vals);
+                        }
+                    }
+
+                    this.refreshAll();
+                    this.syncStatus = 'synced';
+                    this.syncStatusText = 'Hydrated & Synced with Cloud Mirror';
+                }
+            } catch (e) {
+                this.syncStatus = 'offline';
+                this.syncStatusText = 'Offline mode';
+            }
+        },
+
+        async backupToCloud() {
+            try {
+                this.syncStatus = 'syncing';
+                this.syncStatusText = 'Pushing backup to Cloud Sheet...';
+                await fetch(WEB_APP_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'registry', rows: this.registry }) });
+                await fetch(WEB_APP_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'events', rows: this.events }) });
+                this.syncStatus = 'synced';
+                this.syncStatusText = 'Cloud mirror up to date';
+            } catch (e) {
+                this.syncStatus = 'offline';
+                this.syncStatusText = 'Sync failed (Offline)';
+            }
+        },
+
+        async manualCloudSync() {
+            Swal.fire({ title: 'Syncing...', text: 'Fetching latest records from Google Sheet mirror.', allowOutsideClick: false, didOpen: () => { Swal.showLoading(); } });
+            await this.hydrateFromCloud();
+            await this.backupToCloud();
+            Swal.fire({ title: 'Sync Complete!', icon: 'success', timer: 1200, showConfirmButton: false });
+        },
+
+        blankVisitForm() {
+            const f = { visit_date: new Date().toISOString().slice(0,10), vaccine_centre: '', currently_living: '' };
+            for (let i = 1; i <= MAX_DOSES_PER_EVENT; i++) {
+                f[`vaccine_name${i}`] = '';
+                f[`vaccine_type${i}`] = '';
+            }
+            return f;
+        },
+
+        get filteredDirectory() {
+            const q = (this.dirSearch || '').toLowerCase().trim();
+            const living = (this.dirLivingFilter || '').trim();
+            return this.registry.filter(r => {
+                if (living && (r.currently_living || '').trim() !== living) return false;
+                if (q) {
+                    const hay = [r.beneficiary_name, r.eir_id, r.beneficiary_national_id].map(x => (x || '').toLowerCase()).join(' ');
+                    if (!hay.includes(q)) return false;
+                }
+                return true;
+            });
+        },
+
+        eventsFor(eirId) { return this.events.filter(e => e.eir_id === eirId).length; },
+        dosesFor(eirId) { return this.events.filter(e => e.eir_id === eirId).reduce((sum, e) => sum + (e.dose_count || 0), 0); }
+    };
+}
+//]]>
+</script>
+
+
+</body>
+</html>remebr this and  fix bugs in this
